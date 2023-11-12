@@ -35,8 +35,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     //TODO: isso a deve ser um state
-    taskCount = tasks.where((task) => task['status'] == '1').toList().length +
-        tasks.where((task) => task['status'] == '3').toList().length;
+    taskCount = tasks.where((task) => task['status'] == '1').toList().length;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 17, 17, 17),
       appBar: PreferredSize(
