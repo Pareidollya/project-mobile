@@ -38,8 +38,9 @@ class _LoginPageState extends State<LoginPage> {
               "Just do It",
               style: TextStyle(
                 color: Colors.yellow,
-                fontSize: 80,
+                fontSize: 60,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Tourney'
               ),
             ),
             const SizedBox(height: 100),
