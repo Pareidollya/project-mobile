@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/widgets/input_large.dart'; 
+import 'package:app/widgets/input_large.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -10,8 +10,9 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
-  String _selectedAvatar = 'avatar_1'; 
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+  String _selectedAvatar = 'avatar_1';
 
   void _handleRegister() {
     print('Usuário registrado com avatar: $_selectedAvatar');
@@ -29,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundImage: AssetImage('assets/images/$avatarName.png'),
         radius: 30,
         child: isSelected
-            ? Icon(Icons.check_circle, color: Colors.yellow, size: 60) 
+            ? Icon(Icons.check_circle, color: Colors.yellow, size: 60)
             : null,
       ),
     );
@@ -44,7 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.yellow),
-          onPressed: () => Navigator.of(context).pop(), 
+          onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: SingleChildScrollView(
@@ -74,14 +75,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
-              InputLarge(labelText: "Seu nome", controller: _nameController),
               const SizedBox(height: 20),
-              InputLarge(labelText: "Username ( login )", controller: _usernameController),
+              InputLarge(
+                  labelText: "Username ( login )",
+                  controller: _usernameController),
               const SizedBox(height: 20),
-              InputLarge(labelText: "Password", obscureText: true, controller: _passwordController),
+              InputLarge(
+                  labelText: "Password",
+                  obscureText: true,
+                  controller: _passwordController),
               const SizedBox(height: 20),
-              InputLarge(labelText: "Confirm Password", obscureText: true, controller: _confirmPasswordController),
+              InputLarge(
+                  labelText: "Confirm Password",
+                  obscureText: true,
+                  controller: _confirmPasswordController),
               const SizedBox(height: 30),
               const Text(
                 "Selecione um avatar",
@@ -90,9 +97,10 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 20),
               Wrap(
                 alignment: WrapAlignment.center,
-                spacing: 20, 
-                runSpacing: 20, 
-                children: List.generate(6, (index) => _buildAvatar('avatar_${index + 1}')),
+                spacing: 20,
+                runSpacing: 20,
+                children: List.generate(
+                    6, (index) => _buildAvatar('avatar_${index + 1}')),
               ),
               const SizedBox(height: 40),
               ElevatedButton(
@@ -100,7 +108,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.yellow,
                   onPrimary: Colors.black,
-                  padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
