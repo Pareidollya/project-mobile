@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
       ]),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () => CreateTaskScreen.show(context),
+        onPressed: () => CreateTaskScreen.show(context, ''),
         child: Icon(Icons.add, color: Colors.black, size: 30),
         backgroundColor: Colors.yellow,
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'create_task_screen.dart';
+
 class TaskItem extends StatelessWidget {
   final String id;
   final String title;
@@ -69,7 +71,7 @@ class TaskItem extends StatelessWidget {
                 Icons.more_vert, // Ícone com as 3 bolinhas
                 color: Colors.white, // Cor do ícone
               ),
-              onPressed: onMenuPressed,
+              onPressed: () => CreateTaskScreen.show(context, '#${id}'),
             ),
           ),
         ),

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CreateTaskScreen extends StatelessWidget {
-  static void show(BuildContext context) {
+  final String taskId;
+
+  CreateTaskScreen({Key? key, required this.taskId}) : super(key: key);
+
+  static void show(BuildContext context, String taskId) {
+    // se id != '' é criação, senão é edição
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -11,12 +17,15 @@ class CreateTaskScreen extends StatelessWidget {
           topRight: Radius.circular(20),
         ),
       ),
-      builder: (_) => CreateTaskScreen(),
+      builder: (_) => CreateTaskScreen(
+        taskId: taskId,
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenTitle = taskId == '' ? 'Criar' : 'Editar';
     return ConstrainedBox(
       constraints: BoxConstraints(
         minHeight: MediaQuery.of(context).size.height * 0.6,
@@ -44,7 +53,7 @@ class CreateTaskScreen extends StatelessWidget {
               ),
             ),
             Text(
-              'Criar/Editar Tarefa',
+              '$screenTitle Tarefa $taskId',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
