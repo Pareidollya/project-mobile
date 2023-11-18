@@ -1,6 +1,8 @@
 import 'package:app/widgets/list_tasks.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/create_task_screen.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -117,9 +119,7 @@ class _HomePageState extends State<HomePage> {
       ]),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Ação para adicionar uma nova tarefa
-        },
+        onPressed: () => CreateTaskScreen.show(context),
         child: Icon(Icons.add, color: Colors.black, size: 30),
         backgroundColor: Colors.yellow,
       ),
