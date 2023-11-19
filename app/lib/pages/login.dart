@@ -1,5 +1,9 @@
-import 'package:app/widgets/input_large.dart';
+import 'package:app/model/user.dart';
+import 'package:app/providers/user_provider.dart';
+import 'package:app/services/user_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:app/widgets/input_large.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,21 +14,24 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _handleLogin() {
-    //enquanto nao tiver firebase
-    if (_userController.text == "123" && _passwordController.text == "123") {
+  void _handleLogin() async {
+    final userService = UserService();
+    try {
+      User user = await userService.login(
+        _userController.text,
+        _passwordController.text,
+      );
+      print("Usuário logado com sucesso");
+      Provider.of<UserProvider>(context, listen: false).setUser(user);
+
       Navigator.pushNamed(context, '/home');
-    } else {
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Usuário ou senha inválidos!'),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text('Usuário ou senha inválidos, tente novamente!')),
       );
     }
   }
 
-// asd2
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.yellow,
                 fontSize: 60,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'Tourney'
+                fontFamily: 'Tourney',
               ),
             ),
             const SizedBox(height: 100),
@@ -67,10 +74,9 @@ class _LoginPageState extends State<LoginPage> {
             ElevatedButton(
               onPressed: _handleLogin,
               style: ElevatedButton.styleFrom(
-                primary: Colors.yellow,
-                onPrimary: Colors.black,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 135, vertical: 20),
+                backgroundColor: Colors.yellow,
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(horizontal: 135, vertical: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0),
                 ),
@@ -105,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

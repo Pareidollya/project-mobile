@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app/widgets/input_large.dart';
+import 'package:app/services/user_service.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -7,15 +8,49 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   String _selectedAvatar = 'avatar_1';
 
-  void _handleRegister() {
-    print('Usuário registrado com avatar: $_selectedAvatar');
+  void _handleRegister() async {
+    if (_passwordController.text != _confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('As senhas não coincidem!')),
+      );
+      return;
+    }
+
+    try {
+      print("chamando o UserService");
+
+      if (await UserService().getUserByUsername(_usernameController.text)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Usuário já cadastrado!')),
+        );
+        return;
+      }
+
+      await UserService().createUser(
+        _usernameController.text,
+        _passwordController.text,
+        _selectedAvatar,
+      );
+
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Usuário cadastrado com sucesso!')),
+      );
+
+      Navigator.of(context).pop();
+      _usernameController.clear();
+      _passwordController.clear();
+      _confirmPasswordController.clear();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao cadastrar usuário: $e')),
+      );
+    }
   }
 
   Widget _buildAvatar(String avatarName) {
@@ -132,7 +167,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
-    _nameController.dispose();
     _usernameController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();

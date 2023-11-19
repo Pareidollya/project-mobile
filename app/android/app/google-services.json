@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "139219590816",
+    "project_id": "facul-project",
+    "storage_bucket": "facul-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139219590816:android:b89ce5d1f22383ad7db3c5",
+        "android_client_info": {
+          "package_name": "com.unit.justDoIt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlaHivHX7NbdO1f_UKr-ITLMJ35xcljjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
