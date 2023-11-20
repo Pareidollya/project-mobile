@@ -10,7 +10,7 @@ class TaskProvider extends ChangeNotifier {
   List<Task> get tasks => _tasks;
 
   void createTask(Task task) async {
-    await _taskService.createTask(task);
+    task.id = await _taskService.createTask(task);
     _tasks.add(task);
     notifyListeners();
   }

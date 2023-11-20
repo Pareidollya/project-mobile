@@ -1,8 +1,8 @@
-import 'package:app/providers/tasks_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:app/model/task.dart';
+import 'package:app/providers/tasks_provider.dart';
 
 class EditTask extends StatefulWidget {
   final Task task;
@@ -100,37 +100,42 @@ class _EditTaskState extends State<EditTask> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            controller: _titleController,
-            decoration: InputDecoration(labelText: 'Editar Título da Tarefa'),
-          ),
-          SizedBox(height: 10),
-          ListTile(
-            title: Text(
-              DateFormat('dd/MM/yyyy').format(_selectedDate),
+    return Padding(
+      padding: MediaQuery.of(context).viewInsets,
+      child: Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: _titleController,
+              decoration: InputDecoration(labelText: 'Editar Título da Tarefa'),
             ),
-            trailing: Icon(Icons.calendar_today),
-            onTap: () => _selectDate(context),
-          ),
-          ListTile(
-            title: Text(
-              _selectedTime.format(context),
+            SizedBox(height: 10),
+            ListTile(
+              title: Text(DateFormat('dd/MM/yyyy').format(_selectedDate)),
+              trailing: Icon(Icons.calendar_today),
+              onTap: () => _selectDate(context),
             ),
-            trailing: Icon(Icons.access_time),
-            onTap: () => _selectTime(context),
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            child: Text('Atualizar Tarefa'),
-            onPressed: _updateTask,
-          ),
-          ElevatedButton(onPressed: _deleteTask, child: Text('Deletar Tarefa')),
-        ],
+            ListTile(
+              title: Text(_selectedTime.format(context)),
+              trailing: Icon(Icons.access_time),
+              onTap: () => _selectTime(context),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              child: Text('Atualizar Tarefa'),
+              onPressed: _updateTask,
+            ),
+            ElevatedButton(
+              onPressed: _deleteTask, 
+              child: Text('Deletar Tarefa'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

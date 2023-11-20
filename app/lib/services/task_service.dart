@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class TaskService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> createTask(Task task) async {
+  Future<String> createTask(Task task) async {
     DocumentReference docRef = _firestore.collection('tasks').doc();
     await docRef.set({
       'id': docRef.id,
@@ -14,6 +14,7 @@ class TaskService {
       'completed': task.completed,
       'user_id': task.userId,
     });
+    return docRef.id;
   }
 
   Future<List<Task>> getTasks(String userId) async {
